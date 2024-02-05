@@ -14,6 +14,8 @@ def new_file():
     f_path = input("Path : ")
     f_size = input("Size : ")
     f_fill = input("Fill : ")
+    if f_fill == "":
+        f_fill = "0"
     confirm = input("Create this project? (Y/n) : ")
     if confirm == "n":
         print("Cancelled.\n")
@@ -25,28 +27,31 @@ def new_file():
         buffer = bytearray([int(f_fill, 16)] * int(f_size))
         file = f_name
         file_path = f_path
-        print("New buffer instantiated.\n\n")
+        print("New buffer of size " + str(len(buffer)) + " instantiated.\n\n")
         return
     
 def list_buffer():
     print("----[ Current buffer contents ]----\n")
-    index = int("0")
+    index = 0
     line = int("0",16)
     print('0x{:04X}'.format(line) + " : ", end ="")
     for b in buffer:
         if index < 15:
             print('0x{:02X}'.format(b), end =" ")
             index = index + 1
-        else:
-            print("")
-            index = 0
-            line = line + 16
-            print('0x{:04X}'.format(line) + " : ", end ="")
+            continue
+        print('0x{:02X}'.format(b), end =" ")
+        print("")
+        index = 0
+        line = line + 16
+        print('0x{:04X}'.format(line) + " : ", end ="")
     print("\n")
     return
 
 while 1: # Main loop
     cmd = input(file + " [" + mode + "] : ")
+    if cmd == "":
+        continue
     if cmd == "clear":
         os.system('cls')
         continue
