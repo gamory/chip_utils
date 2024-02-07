@@ -7,6 +7,7 @@ buffer = [] # Buffer used for in memory data
 file = "None" # File name only, used in prompt
 file_path = "None" # Full file path
 mode = "None" # Mode
+offset = 0 # This is used to artifically offset addresses.
 
 def new_file():
     print("----[ Create new file ]----\n")
@@ -67,12 +68,15 @@ while 1: # Main loop
         print("help      - You're looking at it!\n")
         print("list      - List current buffer contents\n")
         print("new       - Create a new file\n")
+        print("offset    - Specify an artifical offset\n")
         continue
     if cmd == "list":
         list_buffer()
         continue
     if cmd == "new":
         new_file()
+        continue
+    if cmd == "offset":
         continue
     else:
         print("Invalid command " + cmd + "\n")
